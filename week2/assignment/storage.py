@@ -31,11 +31,10 @@ def save_value(key_name, value):
         #print("File not accessible")
 
     if key_name in mymap.keys():
-        for val in mymap[key_name]:
+        #for val in mymap[key_name]:
             #print('Values: {} {} {}'.format(mymap[key_name], val, value))
 
-            if(val == value):
-                return
+            # if(val == value):  return
         mymap[key_name].append(value)
     else:
         mymap[key_name] = [value]
@@ -54,6 +53,7 @@ def print_value(key_name):
             raw = f.read()
             myjson = json.loads(json.dumps(raw))
             if (myjson == ''):
+                print('')
                 return
             mymap = json.loads( myjson )
             #print(type(mymap))
@@ -61,6 +61,7 @@ def print_value(key_name):
 
     except IOError:
         #print("File not accessible")
+        print('')
         return
 
     if key_name in mymap.keys():
