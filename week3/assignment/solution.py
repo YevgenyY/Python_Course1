@@ -1,33 +1,17 @@
 class FileReader:
-    _filename = ''
+    """Класс FileReader помогает читать из файла"""
 
-    def __init__(self, name):
-        self.setfilename(name)
+    def __init__(self, file_path):
+        self.file_path = file_path
 
-    @classmethod 
-    def setfilename(cls, name):
-        cls._filename = name
-
-    @classmethod 
-    def getfilename(cls):
-        return cls._filename
-        
-
-    @staticmethod
-    def read():
+    def read(self):
         try:
-            filename = FileReader.getfilename()
-            with open(filename) as f:
-                result = f.read()
+            with open(self.file_path) as f:
+                return f.read()
+        except IOError:
+            return ""
 
-            return result
-
-        except FileNotFoundError:
-            return ''
-
-'''
-reader = FileReader('testnotexist')
-text = reader.read()
-reader = FileReader('test.txt')
-print(reader.read())
-'''
+reader = FileReader("not exist")
+print( reader.read() )
+reader = FileReader('solution.py')
+print( reader.read() )
