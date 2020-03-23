@@ -8,19 +8,25 @@ class CarBase:
         except:
             self.carrying = float(0)
 
-    def get_photo_file_ext(self):
-        extension = None
+        self.extension = None
+        extensions = ('.jpg', '.jpeg', '.png', '.gif')
 
         #print('Filename: {}'.format(self.photo_file_name))
         
         try:
             tmp = self.photo_file_name.split('.')
             extension = '.' + tmp[-1] if len(tmp) > 1 else ''
-        except:
-            extension = ''
 
-        #print('EXT: {}'.format(extension))
-        return extension
+            if extension in extensions:
+                self.extension = extension
+        except:
+            self.extension = None
+
+        if self.extension == None or self.brand == '' or self.carrying <= 0:
+            raise ValueError('Wrong photo_file_name or brand')
+
+    def get_photo_file_ext(self):
+        return self.extension
 
 class Car(CarBase):
     car_type = 'car'
@@ -30,8 +36,10 @@ class Car(CarBase):
         try:
             self.passenger_seats_count = int(passenger_seats_count)
         except:
-            self.passenger_seats_count = int(0)
+            self.passenger_seats_count = None
 
+        if self.passenger_seats_count == None or self.passenger_seats_count <= 0:
+            raise ValueError('Wrong passenger_seats_count')
 
 class Truck(CarBase):
     car_type = 'truck'
@@ -66,6 +74,9 @@ class SpecMachine(CarBase):
     def __init__(self, brand, photo_file_name, carrying, extra):
         super().__init__(brand, photo_file_name, carrying)
         self.extra = extra
+
+        if self.extra == '':
+            raise ValueError('Wrong extra field')
 
 def generate_vehicle(car_type, brand='', photo_file_name='', carrying=float(0), passenger_seats_count=0, body_whl='', extra=''):
     cartypes = ('car', 'truck', 'spec_machine')
