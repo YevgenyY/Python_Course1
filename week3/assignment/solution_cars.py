@@ -1,6 +1,6 @@
 class CarBase:
     def __init__(self, brand, photo_file_name, carrying):
-        self.brand = brand.lower()
+        self.brand = brand
         self.photo_file_name = photo_file_name
 
         try:
@@ -15,7 +15,7 @@ class CarBase:
         
         try:
             tmp = self.photo_file_name.split('.')
-            extension = tmp[1] if len(tmp) > 1 else ''
+            extension = '.' + tmp[-1] if len(tmp) > 1 else ''
         except:
             extension = ''
 
@@ -42,10 +42,14 @@ class Truck(CarBase):
 
         whl = body_whl.split('x')
         #print('WHL: {}'.format(whl))
+        if len(whl) != 3:
+            self.body_width = self.body_height = self.body_length = float(0)
+            return
+
         try:
-            self.body_width = float(whl[0])
-            self.body_height = float(whl[1])
-            self.body_length = float(whl[2])
+            self.body_length = float(whl[0])
+            self.body_width = float(whl[1])
+            self.body_height = float(whl[2])
         except:
             self.body_width = self.body_height = self.body_length = float(0)
 
