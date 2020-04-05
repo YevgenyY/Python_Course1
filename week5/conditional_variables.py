@@ -14,7 +14,7 @@ class Queue(object):
                 self._full.wait()
 
             self._queue.append(value)
-            self._empty.notifu()
+            self._empty.notify()
 
     def get(self):
         with self._emtpy:
