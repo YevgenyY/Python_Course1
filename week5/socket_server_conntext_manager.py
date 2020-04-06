@@ -12,7 +12,7 @@ with socket.socket() as sock:
                 try: 
                     data = conn.recv(1024)
                 except socket.timeout:
-                    print("close connection     by timeout")
+                    print("close connection by timeout")
                     break
 
                 if not data:
