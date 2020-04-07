@@ -34,6 +34,7 @@ class Client:
                 data = sock.recv(1024)
 
                 resp = data.decode('utf-8').split('\n')
+
             except:
                 raise ClientError('Wrong request')
 
@@ -103,5 +104,3 @@ class Client:
             out[key].sort()
 
         return out
-
-   

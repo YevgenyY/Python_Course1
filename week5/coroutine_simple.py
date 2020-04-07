@@ -6,6 +6,7 @@ def grep(pattern):
             line = yield
             if pattern in line:
                 print(line)
+
     except GeneratorExit:
         print('stop grep')
 
